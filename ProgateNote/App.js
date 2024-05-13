@@ -1,10 +1,24 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
 import React, { useState } from "react";
-import CustomButton from "./components/customButton";
-import CustomTextInput from "./components/customTextInput";
 import Home from "./screens/Home";
+import AddNote from "./screens/AddNote";
+import EditNote from "./screens/EditNote";
+
+const CurrentPageWidget = ({ currentPage, noteList, setCurrentPage, addNote }) => {
+  switch (currentPage) {
+    case "home":
+      return <Home notelist={noteList} setCurrentPage={setCurrentPage} />;
+    case "add":
+      return <AddNote setCurrentPage={setCurrentPage} addNote={addNote} />;
+    case "edit":
+      return <EditNote />;
+    default:
+      return <Home />;
+  }
+};
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState("home");
   const [noteList, setNoteList] = useState([
     {
       id: 1,
@@ -13,14 +27,18 @@ export default function App() {
     },
   ]);
 
-  return <Home notelist={noteList} />;
-}
+  const addNote = (title, desc) => {
+    const id = noteList.length > 0 ? noteList[noteList.length - 1].id + 1 : 1;
 
-// const styles = StyleSheet.create({
-//   container: {
-//     display: "flex",
-//     flexDirection: "column",
-//     justifyContent: "center",
-//     padding: 40,
-//   },
-// });
+    setNoteList([
+      ...noteList,
+      {
+        id,
+        title: title,
+        desc: desc,
+      },
+    ]);
+  };
+
+  return <CurrentPageWidget currentPage={currentPage} noteList={noteList} setCurrentPage={setCurrentPage} addNote={addNote} />;
+}

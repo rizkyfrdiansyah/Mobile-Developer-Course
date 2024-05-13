@@ -1,23 +1,40 @@
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import React from "react";
-import CustomButton from "../components/customButton";
+import CustomButton from "./../components/CustomButton";
 
-const NoteCard = ({ item }) => (
+const NoteCard = ({ item, setCurrentPage }) => (
   <View style={styles.card}>
     <Text style={styles.cardTitle}>{item.title}</Text>
     <Text>{item.desc}</Text>
     <View style={styles.buttons}>
-      <CustomButton backgroundColor="#FFC300" color="#151D3B" text="Ubah" fontSize={12} width={100} onPress={() => {}} />
+      <CustomButton
+        backgroundColor="#FFC300"
+        color="##151D3B"
+        text="Ubah"
+        fontSize={12}
+        width={100}
+        onPress={() => {
+          setCurrentPage("edit");
+        }}
+      />
       <CustomButton backgroundColor="#D82148" color="#fff" text="Hapus" fontSize={12} width={100} onPress={() => {}} />
     </View>
   </View>
 );
 
-const Home = ({ notelist }) => {
+const Home = ({ notelist, setCurrentPage }) => {
   return (
     <View style={styles.container}>
-      <CustomButton backgroundColor="#DDD" color="#203239" text="Tambahkan Note" width="100%" onPress={() => {}} />
-      <FlatList showsVerticalScrollIndicator={false} data={notelist} renderItem={NoteCard} keyExtractor={(item) => item.id} />
+      <CustomButton
+        backgroundColor="#DDD"
+        color="#203239"
+        text="Tambahkan Note"
+        width="100%"
+        onPress={() => {
+          setCurrentPage("add");
+        }}
+      />
+      <FlatList showsVerticalScrollIndicator={false} data={notelist} renderItem={({ item }) => <NoteCard item={item} setCurrentPage={setCurrentPage} />} keyExtractor={(item) => item.id} />
     </View>
   );
 };
