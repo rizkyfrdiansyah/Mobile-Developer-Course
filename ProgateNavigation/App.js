@@ -6,6 +6,7 @@ import { Button, Image, StyleSheet, Text, View } from "react-native";
 import HomeIcon from "./assets/bottomTabIcons/home.png";
 import ProgateIcon from "./assets/bottomTabIcons/progate.jpeg";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const HomeScreen = ({ navigation }) => {
   return (
@@ -26,30 +27,37 @@ const ProgateScreen = ({ navigation }) => {
   );
 };
 
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+// const Stack = createNativeStackNavigator();
+// const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
+    // <NavigationContainer>
+    //   <Tab.Navigator>
+    //     <Tab.Screen
+    //       name="Home"
+    //       component={HomeScreen}
+    //       options={{
+    //         tabBarLabel: "Home",
+    //         tabBarIcon: () => <Image source={HomeIcon} style={styles.homeIcon} />,
+    //       }}
+    //     />
+    //     <Tab.Screen
+    //       name="Progate"
+    //       component={ProgateScreen}
+    //       options={{
+    //         tabBarLabel: "Progate",
+    //         tabBarIcon: () => <Image source={ProgateIcon} style={styles.progateIcon} />,
+    //       }}
+    //     />
+    //   </Tab.Navigator>
+    // </NavigationContainer>
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            tabBarLabel: "Home",
-            tabBarIcon: () => <Image source={HomeIcon} style={styles.homeIcon} />,
-          }}
-        />
-        <Tab.Screen
-          name="Progate"
-          component={ProgateScreen}
-          options={{
-            tabBarLabel: "Progate",
-            tabBarIcon: () => <Image source={ProgateIcon} style={styles.progateIcon} />,
-          }}
-        />
-      </Tab.Navigator>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Progate" component={ProgateScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
@@ -63,12 +71,12 @@ const styles = StyleSheet.create({
   marginBottom20: {
     marginBottom: 20,
   },
-  homeIcon: {
-    width: 20,
-    height: 20,
-  },
-  progateIcon: {
-    width: 40,
-    height: 40,
-  },
+  // homeIcon: {
+  //   width: 20,
+  //   height: 20,
+  // },
+  // progateIcon: {
+  //   width: 40,
+  //   height: 40,
+  // },
 });
