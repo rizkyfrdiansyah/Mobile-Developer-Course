@@ -7,29 +7,32 @@ import HomeIcon from "./assets/bottomTabIcons/home.png";
 import ProgateIcon from "./assets/bottomTabIcons/progate.jpeg";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import Home from "./screens/Home";
+import Progate from "./screens/Progate";
+import Contact from "./screens/Contact";
 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.marginBottom20}>Home Screen</Text>
-      <Button title="Pergi ke Progate" style={styles.button} onPress={() => navigation.navigate("Progate")} />
-    </View>
-  );
-};
+// const HomeScreen = ({ navigation }) => {
+//   return (
+//     <View style={styles.container}>
+//       <Text style={styles.marginBottom20}>Home Screen</Text>
+//       <Button title="Pergi ke Progate" style={styles.button} onPress={() => navigation.navigate("Progate")} />
+//     </View>
+//   );
+// };
 
-const ProgateScreen = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
-      <Text>Welcome to Progate</Text>
-      <Text style={styles.marginBottom20}>Ayo belajar!</Text>
-      <Button title="Kembali" onPress={() => navigation.goBack()} />
-    </View>
-  );
-};
+// const ProgateScreen = ({ navigation }) => {
+//   return (
+//     <View style={styles.container}>
+//       <Text>Welcome to Progate</Text>
+//       <Text style={styles.marginBottom20}>Ayo belajar!</Text>
+//       <Button title="Kembali" onPress={() => navigation.goBack()} />
+//     </View>
+//   );
+// };
 
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 // const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
@@ -53,11 +56,19 @@ export default function App() {
     //     />
     //   </Tab.Navigator>
     // </NavigationContainer>
+    // <NavigationContainer>
+    //   <Drawer.Navigator initialRouteName="Home">
+    //     <Drawer.Screen name="Home" component={HomeScreen} />
+    //     <Drawer.Screen name="Progate" component={ProgateScreen} />
+    //   </Drawer.Navigator>
+    // </NavigationContainer>
+
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Progate" component={ProgateScreen} />
-      </Drawer.Navigator>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Progate" component={Progate} />
+        <Stack.Screen name="Contact" component={Contact} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
