@@ -1,7 +1,11 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 
-const ProgateService = () => {
+const ProgateService = ({ navigation }) => {
+  useEffect(() => {
+    navigation.addListener("focus", () => alert("ProgateService screen is focused"));
+    navigation.addListener("blur", () => alert("ProgateService screen is unfocused"));
+  });
   return (
     <View style={styles.container}>
       <Text style={[styles.title, styles.marginBottom20]}>Welcome to Progate!</Text>
