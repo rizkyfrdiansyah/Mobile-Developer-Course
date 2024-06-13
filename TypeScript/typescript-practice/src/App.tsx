@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Todos from './components/Todos'
+import { Todo } from './TodoType'
 
 function App() {
-  const [todos, setTodos] = useState([
+  const [todos, setTodos] = useState<Todo[]>([
     {
       id: 1,
       title: 'Finish Progate React Course',
@@ -20,8 +21,8 @@ function App() {
     },
   ])
 
-  const toggleCompleted = (todoId) => {
-    const updatedTodos = todos.map((todo) => {
+  const toggleCompleted = (todoId: number): void => {
+    const updatedTodos: Todo[] = todos.map((todo) => {
       if (todo.id === todoId) {
         todo.completed = !todo.completed
       }
@@ -38,7 +39,7 @@ function App() {
   )
 }
 
-const styles = {
+const styles : { [key: string]: React.CSSProperties} = {
   container: {
     textAlign: 'center',
     padding: '12px',

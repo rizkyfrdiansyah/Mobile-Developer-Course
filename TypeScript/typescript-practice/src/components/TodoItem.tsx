@@ -1,7 +1,13 @@
 import React from 'react'
+import { Todo } from '../TodoType'
 
-const TodoItem = ({ todo, toggleCompleted }) => {
-  const getTodoTitleStyle = () => {
+type TodoItemProps = {
+    todo: Todo
+    toggleCompleted: (todoId: number) => void
+}
+
+const TodoItem = ({ todo, toggleCompleted }: TodoItemProps) => {
+  const getTodoTitleStyle = (): { textDecoration: 'line-through' | 'none' } => {
     if (todo.completed === true) {
       return { textDecoration: 'line-through' }
     } else {
@@ -14,8 +20,9 @@ const TodoItem = ({ todo, toggleCompleted }) => {
       <input
         type="checkbox"
         style={styles.checkbox}
-        onChange={() => toggleCompleted(todo.id)}
+        onChange={(): void => toggleCompleted(todo.id)}
       />
+      
       <p style={getTodoTitleStyle()}>{todo.title}</p>
       <button style={styles.button}>x</button>
     </div>
